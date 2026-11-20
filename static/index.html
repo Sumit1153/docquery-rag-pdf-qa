@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#081521">
+  <title>DocQuery — Ask your PDFs</title>
+  <link rel="stylesheet" href="/static/styles.css">
+  <script src="/static/app.js" defer></script>
+</head>
+<body>
+  <div class="shell">
+    <aside class="sidebar">
+      <div class="brand"><div class="brand-symbol"><svg width="26" height="26" viewBox="0 0 26 26" fill="none"><path d="M6 3h10l5 5v14H6z" stroke="currentColor" stroke-width="1.7"/><path d="M16 3v6h6M9 13h9M9 17h7" stroke="currentColor" stroke-width="1.6"/></svg></div><div><strong>DocQuery<span class="brand-dot">.</span></strong><small>Knowledge, unlocked.</small></div></div>
+      <div class="nav-label">WORKSPACE</div>
+      <div class="nav-item active"><span class="nav-icon">▦</span> Document Library <span class="nav-count" id="document-count">0</span></div>
+      <div class="sidebar-section">
+        <div class="section-heading"><span>YOUR DOCUMENTS</span><button type="button" class="icon-button" id="refresh-docs" title="Refresh documents" aria-label="Refresh documents">↻</button></div>
+        <div id="document-list" class="document-list"><p class="sidebar-empty">Uploaded files will appear here.</p></div>
+      </div>
+      <div class="sidebar-bottom"><div class="connected-icon" id="status-icon"></div><div><strong id="status-title">Checking connections</strong><small id="status-subtitle">Checking your setup...</small></div></div>
+    </aside>
+    <main class="content">
+      <header class="header"><div class="breadcrumb">Workspace <span>/</span> <strong>Document Q&A</strong></div><div class="model-pill"><span class="sparkle">✦</span> Gemini + pgvector</div></header>
+      <div class="main-inner">
+        <div class="eyebrow"><span class="eyebrow-line"></span> INTELLIGENT DOCUMENT SEARCH</div>
+        <h1>Find answers in<br><em>your documents.</em></h1>
+        <p class="intro">Upload a PDF, ask a question, and get an answer grounded in the actual document — with precise page references.</p>
+        <section class="upload-panel" id="dropzone" aria-label="Upload PDF">
+          <div class="upload-art"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 16V4m-4 4 4-4 4 4M4 16v3a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-3"/></svg></div>
+          <div class="upload-details"><h2>Bring your knowledge in</h2><p>Drag & drop a PDF here or <button id="browse" class="text-link" type="button">browse files</button></p><span>PDF ONLY · MAX 10 MB · MAX 30 PAGES · TEXT-BASED PDFS</span></div>
+          <input id="file-input" type="file" accept="application/pdf,.pdf" hidden>
+          <div class="upload-status" id="upload-status"></div>
+        </section>
+        <div class="question-topline"><h2>Ask a question</h2><div class="question-hint">Step 02 <span>/</span> Query</div></div>
+        <div class="query-panel">
+          <label class="input-label" for="document-select">SEARCH WITHIN</label>
+          <select id="document-select"><option value="">All uploaded documents</option></select>
+          <label class="input-label question-label" for="question">YOUR QUESTION</label>
+          <textarea id="question" rows="3" maxlength="1000" placeholder="What are the main findings of this document?"></textarea>
+          <div class="query-footer"><div><span class="badge-dot"></span> Top 3 relevant passages <span class="footer-sep">•</span> Page citations included</div><button class="ask-button" id="ask-button" type="button">Ask DocQuery <span>↗</span></button></div>
+        </div>
+        <div id="result" class="result hidden" aria-live="polite"></div>
+        <div class="suggestions"><div class="suggestions-label">TRY ASKING</div><div class="suggestion-buttons"><button class="suggestion" type="button">Summarize the key findings</button><button class="suggestion" type="button">What conclusions are presented?</button><button class="suggestion" type="button">What limitations are discussed?</button></div></div>
+        <div class="bottom-note"><span>◈</span> Built with retrieval-augmented generation <span class="bottom-divider">·</span> Answers depend on your source PDFs and Gemini API</div>
+      </div>
+    </main>
+  </div>
+</body>
+</html>
